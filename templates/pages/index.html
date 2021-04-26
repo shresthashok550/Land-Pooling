@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Home {% endblock title %}
+{% block css %}
+  <style>
+  .main-body{
+      text-align: center;
+  }
+  .padding{
+      padding: 30px;
+  }
+  </style>
+{% endblock css %}
+{% block content %}
+{% include "partials/_navindex.html" %}
+<section class="main-body container-fluid margin">
+    <div class="row">
+        <div class="col-6">
+            <h2>Land Pooling</h2>
+            <i>"Jagga ekikaran or Chaklabandi"</i>
+            <div class="padding">
+                Land pooling, more commonly known as land readjustment, is a technique that involves 
+                acquiring fragmented plots belonging to many different landholders, consolidating the various 
+                plots into one area, subdividing this area in an orderly and planned manner, and redistributing 
+                plots back to the original owners. Land pooling is an effective tool for combined farming, it is 
+                either called Jagga ekikaran or Chaklabandi in Nepali.
+                </br>
+                Generally, in the agricultural sector, farmers pool their lands together to create large plots and 
+                carry out combined farming, which would bring the expertise of entrepreneurs and business 
+                principles into farming. The profit can be divided among the landowners on the basis of their 
+                land percentage. Due to land pooling the traditional means of agriculture can be overcomed or 
+                replaced by modern tools and methods. Many resources for agriculture development like 
+                irrigation canals, roads, market places can be maintained where farmers will be treated with 
+                respect and dignity due to which productivity also increases. Land pooling can also be initiated 
+                by local levels such as municipalities as per the Local Self-Governance Act, 1999.
+
+            </div>
+            <div>
+                    <a href="{% url 'webmap' %}"><button class="btn btn-info">View Map</button></a>
+                </div>
+        </div>
+        <div class="col-6">
+            <img src="{% static 'img/landpool.png' %}" alt="">
+        </div>
+    </div>
+    
+</section>
+
+{% include "partials/_footer.html" %}
+{% endblock content %}

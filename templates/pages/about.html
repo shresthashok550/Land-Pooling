@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} About {% endblock title %}
+{% block css %}
+<style>
+    .center {
+        padding: 150px 50px 0 50px;
+        text-align: center;
+    }
+
+    .parent {
+        padding: 30px;
+        margin-top: 100px;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+{% include "partials/_navindex.html" %}
+
+<div class="container-fluid parent">
+    <div class="row">
+        <div class="col-6 center">
+            <h3>Area Covered (sq m)</h3>
+            <p>In developing countries like ours where land are not properly planned and organized, land pooling can play 
+                a major role in the development of that country or place. Land Pooling greatly enhance agriculture but land pooling feature 
+                are not properly documented and
+                even if they are properly documented, they are in low quality maps. 
+                Reliable information regarding
+                them can be of great help which can help in efficient service delivery.</p>
+        </div>
+        <div class="col-6">
+            <div id="housing-pie-chart" style="width: 100%; height: 500px;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid parent">
+    <div class="row">
+        <div class="col-6">
+            <div id="housing-bar-chart" style="width: 100%; height: 500px;"></div>
+        </div>
+        <div class="col-6 center">
+            <h3>Plot Classification based on area</h3>
+            <p>In developing countries like ours where land are not properly planned and organized, land pooling can play 
+                a major role in the development of that country or place. Land Pooling greatly enhance agriculture but land pooling feature 
+                are not properly documented and
+                even if they are properly documented, they are in low quality maps. 
+                Reliable information regarding
+                them can be of great help which can help in efficient service delivery.</p>
+        </div>
+
+    </div>
+</div>
+
+{% include "partials/_footer.html" %}
+{% endblock content %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+<script>
+    // Area covered : Pie Chart
+    var myChart = echarts.init(document.getElementById('housing-pie-chart'));
+    var option = {
+        title: {
+            text: 'Syangja Gutthim Area Covered (Sq m)',
+            subtext: 'All the area inside Plot',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'right',
+            data: ['Plot', 'Road Network', 'Irrigation canal']
+        },
+        series: [
+            {
+                name: 'Syangja Gutthim Area Covered (Sq m)',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+                    { value: 150509.5258, name: 'Plot' },
+                    { value: 5536.9676, name: 'Road Network' },
+                    { value: 2040.4537, name: 'Irrigation canal' },
+
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+
+
+    // Building types : bar chart
+    var myChart = echarts.init(document.getElementById('housing-bar-chart'));
+    bar1 = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['1-3 ropani', '3-5 ropani', '5-7 ropani', '7-9 ropani', '9-11 ropani', '11-13 ropani'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: 'Plots',
+                type: 'bar',
+                barWidth: '60%',
+                data: [5,12,10,7,6,5]
+            }
+        ]
+    };
+    myChart.setOption(bar1)
+
+</script>
+{% endblock js %}

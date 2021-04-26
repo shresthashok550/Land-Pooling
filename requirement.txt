@@ -1,0 +1,8 @@
+asgiref==3.3.4
+Django==3.2
+django-leaflet==0.27.1
+GDAL @ file:///E:/lp/GDAL-3.1.4-cp38-cp38-win_amd64.whl
+psycopg2==2.8.6
+psycopg2-binary==2.8.6
+pytz==2021.1
+sqlparse==0.4.1

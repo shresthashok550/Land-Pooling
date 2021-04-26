@@ -1,0 +1,212 @@
+{% extends "base.html" %} {% load static %} {% block title %} Webmap {% endblock title %} {% block css %}
+<style>
+  .leaflet-popup-content {
+    width: 500px !important;
+  }
+</style>
+{% endblock css %} {% block content %}
+<!-- map view -->
+<h1 class="title" leaflet-browser-print-content style="display: none;">
+  Land Pooling | Jagga ekikaran
+</h1>
+<div id="map"></div>
+
+{% include "map-control/_navbar.html" %} 
+{% include "map-control/functions.html"%} 
+{% include "map-control/add-vector.html" %} 
+{% include "map-control/share.html" %} 
+{% include "map-control/about.html" %}
+{% include "map-control/side-control.html" %}
+{% include "map-control/coordinate.html" %}
+{% endblock content %} 
+
+{% block js %}
+<script>
+  var plotStyle = {
+      color: "#FF0000",
+      weight: 2,
+      fillOpacity: 0,
+    };
+
+  var parcelStyle = {
+    color: "#07b9d9",
+    weight: 2,
+    fillOpacity: 0,
+  };
+
+  var poiStyle = {
+    radius: 5,
+    fillColor: "#ebd454",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+    };
+    
+  $.getJSON("{% url 'plot' %}", function (data) {
+    var plot1 = L.geoJSON(data, {
+      style: plotStyle,
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          click: function (e) {
+            popupContents(e);
+            $(".sidebar-info").html(`<h4>Plot</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Id </td><td> ${feature.properties.pk}</td></tr>
+                                <tr><td> Plot No. </td><td> ${feature.properties.plot_no}</td></tr>
+                                <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
+                                <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
+                                <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
+                                <tr><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                <tr><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
+                                <tr><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
+                                <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
+                                <tr><td> Distributed area </td><td> ${feature.properties.distri_are}</td></tr>
+                                  <tr><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
+                              <tr><td> Distribued area </td><td>${feature.properties.distri_pa}</td></tr>`);
+          },
+        });
+      },
+    }).addTo(map);
+    var layer = new L.layerGroup().addLayer(plot1),
+      selector = $(".plotlayer");
+     opac = $(".plotlayer-selection");
+    $('.sldOpacity').on('change', function(){
+    $('.image-opacity').html(this.value);
+    plot1.setStyle({opacity: this.value});
+    });
+
+    layerToggler(selector, layer, opac);
+    removeAllVectorLayer(layer);
+    addDefaultVectorLayer(layer);
+  });
+
+    $.getJSON("{% url 'parcel' %}", function (data) {
+    var parcel1 = L.geoJSON(data, {
+      style: parcelStyle,
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          click: function (e) {
+            popupContents(e);
+            $(".sidebar-info").html(`<h4>Parcel</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Id </td><td> ${feature.properties.pk}</td></tr>
+                                  <tr><td> Owner Name </td><td>${feature.properties.owner_name}</td></tr>
+                                  <tr><td> Parcel No. </td><td>${feature.properties.parcelno}</td></tr>
+                                  <tr><td> Category </td><td>${feature.properties.category}</td></tr>
+                                  <tr><td> Area(m2) </td><td>${feature.properties.existing_a}</td></tr>
+                                  <tr><td> Area(ropani) </td><td>${feature.properties.ropani_aan}</td></tr>`);
+          },
+        });
+      },
+    }).addTo(map);
+    var layer = new L.layerGroup().addLayer(parcel1),
+      selector = $(".parcellayer");
+     opac = $(".parcellayer-selection");
+    $('.sldOpacity5').on('change', function(){
+    $('.image-opacity5').html(this.value);
+    parcel1.setStyle({opacity: this.value});
+    });
+
+    layerToggler(selector, layer, opac);
+    removeAllVectorLayer(layer);
+    addDefaultVectorLayer(layer);
+  });
+
+    $.getJSON("{% url 'poi' %}", function (data) {
+    var poi1 = L.geoJSON(data, {
+      style: poiStyle,
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          click: function (e) {
+            popupContents(e);
+            $(".sidebar-info").html(`<h4>POI</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody>
+                              <tr><td> Point ID </td><td>${feature.properties.point_id}</td></tr>`);
+          },
+        });
+      },
+    });
+    var layer = new L.layerGroup().addLayer(poi1),
+      selector = $(".poi");
+     opac = $(".poi-selection");
+    $('.sldOpacity8').on('change', function(){
+    $('.image-opacity8').html(this.value);
+    poi1.setStyle({fillOpacity: this.value});
+    });
+
+    layerToggler(selector, layer, opac);
+    removeAllVectorLayer(layer);
+  });
+
+  $(".road-selection").hide();
+  $(".irrigation-selection").hide();
+  $(".poi-selection").hide();
+  $(".cut-selection").hide();
+  $(".zonal-selection").hide();
+
+  var dem = new L.TileLayer.WMS('http://localhost:8080/geoserver/final1/wms',{
+    layers: 'final1:dem1',
+    format: 'image/png',
+    transparent: true,
+})
+$(".dem-selection").hide();
+var layer = new L.layerGroup().addLayer(dem),
+      selector = $(".demlayer");
+     opac = $(".dem-selection");
+    $('.sldOpacity9').on('change', function(){
+    $('.image-opacity9').html(this.value);
+    dem.setOpacity(this.value);
+    });
+    layerToggler(selector, layer, opac);
+
+
+
+  function layerToggler(selector, layer, opac) {
+    selector.click(function () {
+      if ($(this).prop("checked") === true) {
+        map.addLayer(layer);
+        opac.show();
+      } else if ($(this).prop("checked") === false) {
+        map.removeLayer(layer);
+        opac.hide();
+      }
+    });
+  }
+
+  function removeAllVectorLayer(layer) {
+    $(".remove-all-vector-layers").click(function () {
+      map.removeLayer(layer);
+      $(".plotlayer").prop("checked", false);
+      $(".road-network").prop("checked", false);
+      $(".irrigation-line").prop("checked", false);
+      $(".parcellayer").prop("checked", false);
+      $(".poi").prop("checked", false);
+      $(".plotlayer-selection").hide();
+      $(".parcellayer-selection").hide();
+      $(".road-selection").hide();
+      $(".irrigation-selection").hide();
+      $(".poi-selection").hide();
+    });
+  }
+
+  // add default utilities layers
+  function addDefaultVectorLayer(layer) {
+    $(".add-default-vector-layer").click(function () {
+      $(".plotlayer").prop("checked", true);
+      $(".plotlayer-selection").show();
+      $(".parcellayer").prop("checked", true);
+      $(".parcellayer-selection").show();
+      layer.addTo(map);
+    });
+  }
+
+
+console.log('data is loaded');
+
+</script>
+{% endblock js %}

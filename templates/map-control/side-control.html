@@ -1,0 +1,138 @@
+<!-- layer toggler -->
+<section class="layer-toggler">
+    <i class="fas fa-layer-group"></i>
+</section>
+
+<!-- sidebar layer control -->
+<section id="sidebar-layer-control">
+    <div class="sidebar-header">
+        <i class="fas fa-info-circle"></i>
+        <h5>Options</h5>
+        <i class="fas fa-times sidebar-close" id="layer-close"></i>
+    </div>
+    <div class="clicked-coordinate">
+        <p class="lat"></p>
+        <p class="long"></p>
+    </div>
+    <div class="sidebar-info"></div>
+    <button class="btn btn-info m-4 go-back-to-options" style="display: none">Go back to Options</button>
+    <div class="sidebar-layer-control-main-body">
+        <div>
+            <p>We present you the web based application for the land pooling system</p>
+            <button type="button" class="tutorial btn btn-info btn-lg btn-block">HOW TO USE</button>
+        </div>
+        <hr>
+
+        <div>
+            <h5 align=center>Base Layers</h5>
+            <input class="col-8" type="text" placeholder="Choose Your Layers..."> <i class="fas fa-search"></i>
+            <div class="layer-selection">
+                <div>
+                    <input class="satellite" name="basemap" type="radio" checked>Satellite Map
+                </div>
+                <div class='satellite-selection'>
+                <h5 >Opacity:  </h5>
+                 <input type="range" class="sldOpacity1" min="0" max="1" step="0.1" value="1" />
+                 <span class="image-opacity1">1</span>
+                </div>
+                <div>
+                    <input class="osm" name="basemap" type="radio" >Open Street Map
+                </div>
+                <div class='osm-selection'>
+                    <h5 >Opacity:  </h5>
+                     <input type="range" class="sldOpacity2" min="0" max="1" step="0.1" value="1" />
+                     <span class="image-opacity2">1</span>
+                    </div>
+                <div>
+                    <input class="water" name="basemap" type="radio">Water Color Map
+                </div>
+                <div class='water-selection'>
+                    <h5 >Opacity:  </h5>
+                     <input type="range" class="sldOpacity3" min="0" max="1" step="0.1" value="1" />
+                     <span class="image-opacity3">1</span>
+                    </div>
+                <div>
+                    <input class="mapbox" name="basemap" type="radio">Mapbox
+                </div>
+                <div class='mapbox-selection'>
+                    <h5 >Opacity:  </h5>
+                     <input type="range" class="sldOpacity4" min="0" max="1" step="0.1" value="1" />
+                     <span class="image-opacity4">1</span>
+                    </div>
+            </div>
+            
+            <button type="button" class="btn btn-success col-5 add-default-baselayer">Add Default Base Layer</button>
+            <button type="button" class="btn btn-danger col-5 remove-all-baselayer">Remove All Base
+                Layers</button>
+        </div>
+        <hr>
+        <div>
+            <h5 align=center>Shapefiles</h5>
+            <div class="layer-selection">
+                <div><input type="checkbox" class='plotlayer' checked>New  Plot</div>
+                <div class='plotlayer-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity">1</span>
+                </div>
+                <div><input type="checkbox" class='parcellayer' checked>Old Parcel</div>
+                <div class='parcellayer-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity5" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity5">1</span>
+                </div>
+                <div><input type="checkbox" class="road-network" >Road Network</div>
+                <div class='road-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity6" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity6">1</span>
+                </div>
+                <div><input type="checkbox" class="irrigation-line">Irrigation Canal</div>
+                <div class='irrigation-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity7" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity7">1</span>
+                </div>
+                <div><input type="checkbox" class="poi">Point of Interest</div>
+                <div class='poi-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity8" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity8">1</span>
+                </div>
+                
+            </div>
+
+            <button type="button" class="btn btn-success col-5 add-default-vector-layer">Add Default Layers</button>
+            <button type="button" class="btn btn-danger col-5 remove-all-vector-layers">Remove All Layers</button>
+        </div>
+        <hr>
+        <div>
+            <h5 align=center>Rasterfiles</h5>
+            <div class="layer-selection">
+                <div><input type="checkbox" class='demlayer'>Digital Elevation Model</div>
+                <div class='dem-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity9" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity9">1</span>
+                </div>
+                <div><input type="checkbox" class=cutlayer' checked>Cut and Fill</div>
+                <div class='cut-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity10" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity10">1</span>
+                </div>
+                <div><input type="checkbox" class="zonallayer" >Zonal Statistics</div>
+                <div class='zonal-selection'>
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity11" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity11">1</span>
+                </div>
+
+                <!-- <div><input type="checkbox" class="electrical-line" checked>Electrical Line</div> -->
+                
+            </div>
+
+        </div>
+        <hr>
+    </div>
+</section>
