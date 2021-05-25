@@ -30,7 +30,7 @@
                 <div>
                     <input class="satellite" name="basemap" type="radio" checked>Satellite Map
                 </div>
-                <div class='satellite-selection'>
+                <div class='satellite-selection' style="display: flex;">
                 <h5 >Opacity:  </h5>
                  <input type="range" class="sldOpacity1" min="0" max="1" step="0.1" value="1" />
                  <span class="image-opacity1">1</span>
@@ -38,7 +38,7 @@
                 <div>
                     <input class="osm" name="basemap" type="radio" >Open Street Map
                 </div>
-                <div class='osm-selection'>
+                <div class='osm-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                      <input type="range" class="sldOpacity2" min="0" max="1" step="0.1" value="1" />
                      <span class="image-opacity2">1</span>
@@ -46,7 +46,7 @@
                 <div>
                     <input class="water" name="basemap" type="radio">Water Color Map
                 </div>
-                <div class='water-selection'>
+                <div class='water-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                      <input type="range" class="sldOpacity3" min="0" max="1" step="0.1" value="1" />
                      <span class="image-opacity3">1</span>
@@ -54,7 +54,7 @@
                 <div>
                     <input class="mapbox" name="basemap" type="radio">Mapbox
                 </div>
-                <div class='mapbox-selection'>
+                <div class='mapbox-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                      <input type="range" class="sldOpacity4" min="0" max="1" step="0.1" value="1" />
                      <span class="image-opacity4">1</span>
@@ -69,36 +69,37 @@
         <div>
             <h5 align=center>Shapefiles</h5>
             <div class="layer-selection">
+                <div><input type="checkbox" class='parcellayer' checked>Old Parcel</div>
+                <div class='parcellayer-selection' style="display: flex;">
+                    <h5 >Opacity:  </h5>
+                <input type="range" class="sldOpacity5" min="0" max="1" step="0.1" value="1" />
+                <span class="image-opacity5"> 1</span>
+                </div>
                 <div><input type="checkbox" class='plotlayer' checked>New  Plot</div>
-                <div class='plotlayer-selection'>
+                <div class='plotlayer-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity">1</span>
                 </div>
-                <div><input type="checkbox" class='parcellayer' checked>Old Parcel</div>
-                <div class='parcellayer-selection'>
-                    <h5 >Opacity:  </h5>
-                <input type="range" class="sldOpacity5" min="0" max="1" step="0.1" value="1" />
-                <span class="image-opacity5">1</span>
-                </div>
+                
                 <div><input type="checkbox" class="road-network" >Road Network</div>
-                <div class='road-selection'>
+                <div class='road-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity6" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity6">1</span>
                 </div>
                 <div><input type="checkbox" class="irrigation-line">Irrigation Canal</div>
-                <div class='irrigation-selection'>
+                <div class='irrigation-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity7" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity7">1</span>
                 </div>
                 <div><input type="checkbox" class="poi">Point of Interest</div>
-                <div class='poi-selection'>
+                <!-- <div class='poi-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity8" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity8">1</span>
-                </div>
+                </div> -->
                 
             </div>
 
@@ -110,19 +111,19 @@
             <h5 align=center>Rasterfiles</h5>
             <div class="layer-selection">
                 <div><input type="checkbox" class='demlayer'>Digital Elevation Model</div>
-                <div class='dem-selection'>
+                <div class='dem-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity9" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity9">1</span>
                 </div>
                 <div><input type="checkbox" class=cutlayer' checked>Cut and Fill</div>
-                <div class='cut-selection'>
+                <div class='cut-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity10" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity10">1</span>
                 </div>
                 <div><input type="checkbox" class="zonallayer" >Zonal Statistics</div>
-                <div class='zonal-selection'>
+                <div class='zonal-selection' style="display: flex;">
                     <h5 >Opacity:  </h5>
                 <input type="range" class="sldOpacity11" min="0" max="1" step="0.1" value="1" />
                 <span class="image-opacity11">1</span>

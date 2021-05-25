@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from .models import Plot, Parcel, poi1, Joint
+from .models import Parcel, Point, Joint, Road, Irrigation
 # Create your views here.
 
 def plot_datasets(request):
@@ -14,5 +14,13 @@ def parcel_datasets(request):
 	return HttpResponse(parcels,content_type='json')
 
 def poi_datasets(request):
-	pois = serialize('geojson', poi1.objects.all())
+	pois = serialize('geojson', Point.objects.all())
 	return HttpResponse(pois,content_type='json')
+
+def road_datasets(request):
+	road = serialize('geojson', Road.objects.all())
+	return HttpResponse(road,content_type='json')
+
+def irrigation_datasets(request):
+	irrigation = serialize('geojson', Irrigation.objects.all())
+	return HttpResponse(irrigation,content_type='json')

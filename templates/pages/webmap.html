@@ -22,16 +22,28 @@
 
 {% block js %}
 <script>
+  var parcelStyle = {
+    color: "#07b9d9",
+    weight: 2,
+    fillOpacity: 0,
+  };
+
   var plotStyle = {
       color: "#FF0000",
       weight: 2,
       fillOpacity: 0,
     };
 
-  var parcelStyle = {
-    color: "#07b9d9",
+  var roadStyle = {
+    color: "#ffcc00",
     weight: 2,
-    fillOpacity: 0,
+    fillOpacity: 0.6,
+  };
+
+  var irrigationStyle = {
+    color: " #0000ff",
+    weight: 2,
+    fillOpacity: 0.6,
   };
 
   var poiStyle = {
@@ -43,6 +55,41 @@
     fillOpacity: 0.8,
     };
     
+    $.getJSON("{% url 'parcel' %}", function (data) {
+    var parcel1 = L.geoJSON(data, {
+      style: parcelStyle,
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          click: function (e) {
+            popupContents(e);
+            $(".sidebar-info").html(`<h4>Parcel</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Id </td><td> ${feature.properties.pk}</td></tr>
+                                  <tr><td> Owner Name </td><td>${feature.properties.owner_name}</td></tr>
+                                  <tr><td> Parcel No. </td><td>${feature.properties.parcelno}</td></tr>
+                                  <tr><td> Category </td><td>${feature.properties.category}</td></tr>
+                                  <tr><td> Area(m2) </td><td>${feature.properties.existing_a}</td></tr>
+                                  <tr><td> Area(ropani) </td><td>${feature.properties.ropani_aan}</td></tr>`);
+          },
+        });
+      },
+    })
+    var layer = new L.layerGroup().addLayer(parcel1).addTo(map),
+      selector = $(".parcellayer");
+     opac = $(".parcellayer-selection");
+    $('.sldOpacity5').on('change', function(){
+    $('.image-opacity5').html(this.value);
+    parcel1.setStyle({opacity: this.value});
+    });
+
+    layerToggler(selector, layer, opac);
+    removeAllVectorLayer(layer);
+    addDefaultVectorLayer(layer);
+    
+  });
+  
+
   $.getJSON("{% url 'plot' %}", function (data) {
     var plot1 = L.geoJSON(data, {
       style: plotStyle,
@@ -68,8 +115,8 @@
           },
         });
       },
-    }).addTo(map);
-    var layer = new L.layerGroup().addLayer(plot1),
+    })
+    var layer = new L.layerGroup().addLayer(plot1).addTo(map),
       selector = $(".plotlayer");
      opac = $(".plotlayer-selection");
     $('.sldOpacity').on('change', function(){
@@ -82,42 +129,64 @@
     addDefaultVectorLayer(layer);
   });
 
-    $.getJSON("{% url 'parcel' %}", function (data) {
-    var parcel1 = L.geoJSON(data, {
-      style: parcelStyle,
+  $.getJSON("{% url 'road' %}", function (data) {
+    var road1 = L.geoJSON(data, {
+      style: roadStyle,
       onEachFeature: function (feature, layer) {
         layer.on({
           click: function (e) {
             popupContents(e);
-            $(".sidebar-info").html(`<h4>Parcel</h4>
+            $(".sidebar-info").html(`<h4>Road</h4>
                               <div class="container"><table class="table table-striped">
                               <thead><tr><th>Properties</th><th>Value</th></tr></thead>
-                              <tbody><tr><td> Id </td><td> ${feature.properties.pk}</td></tr>
-                                  <tr><td> Owner Name </td><td>${feature.properties.owner_name}</td></tr>
-                                  <tr><td> Parcel No. </td><td>${feature.properties.parcelno}</td></tr>
-                                  <tr><td> Category </td><td>${feature.properties.category}</td></tr>
-                                  <tr><td> Area(m2) </td><td>${feature.properties.existing_a}</td></tr>
-                                  <tr><td> Area(ropani) </td><td>${feature.properties.ropani_aan}</td></tr>`);
+                              <tbody>
+                              <tr><td> Point ID </td><td>${feature.properties.objectid}</td></tr>`);
           },
         });
       },
-    }).addTo(map);
-    var layer = new L.layerGroup().addLayer(parcel1),
-      selector = $(".parcellayer");
-     opac = $(".parcellayer-selection");
-    $('.sldOpacity5').on('change', function(){
-    $('.image-opacity5').html(this.value);
-    parcel1.setStyle({opacity: this.value});
+    });
+    var layer = new L.layerGroup().addLayer(road1),
+      selector = $(".road-network");
+     opac = $(".road-selection");
+    $('.sldOpacity6').on('change', function(){
+    $('.image-opacity6').html(this.value);
+    road1.setStyle({opacity: this.value});
     });
 
     layerToggler(selector, layer, opac);
     removeAllVectorLayer(layer);
-    addDefaultVectorLayer(layer);
+  });  
+
+  $.getJSON("{% url 'irrigation' %}", function (data) {
+    var irrigation1 = L.geoJSON(data, {
+      style: irrigationStyle,
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          click: function (e) {
+            popupContents(e);
+            $(".sidebar-info").html(`<h4>Irrigation</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody>
+                              <tr><td> Point ID </td><td>${feature.properties.objectid}</td></tr>`);
+          },
+        });
+      },
+    });
+    var layer = new L.layerGroup().addLayer(irrigation1),
+      selector = $(".irrigation-line");
+     opac = $(".irrigation-selection");
+    $('.sldOpacity7').on('change', function(){
+    $('.image-opacity7').html(this.value);
+    irrigation1.setStyle({opacity: this.value});
+    });
+
+    layerToggler(selector, layer, opac);
+    removeAllVectorLayer(layer);
   });
 
     $.getJSON("{% url 'poi' %}", function (data) {
     var poi1 = L.geoJSON(data, {
-      style: poiStyle,
       onEachFeature: function (feature, layer) {
         layer.on({
           click: function (e) {
@@ -126,12 +195,15 @@
                               <div class="container"><table class="table table-striped">
                               <thead><tr><th>Properties</th><th>Value</th></tr></thead>
                               <tbody>
-                              <tr><td> Point ID </td><td>${feature.properties.point_id}</td></tr>`);
+                              <tr><td> Point ID </td><td>${feature.properties.pointid}</td></tr>`);
           },
         });
       },
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, poiStyle);
+      },
     });
-    var layer = new L.layerGroup().addLayer(poi1),
+    var layer = new L.markerClusterGroup().addLayer(poi1),
       selector = $(".poi");
      opac = $(".poi-selection");
     $('.sldOpacity8').on('change', function(){

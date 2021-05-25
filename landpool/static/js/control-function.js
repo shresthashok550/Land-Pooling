@@ -95,8 +95,9 @@ var measureControlOption = {
    secondaryLengthUnit: 'kilometers',
    primaryAreaUnit: 'sqmeters',
    secondaryAreaUnit: undefined,
-   activeColor: '#ed3833',
-   completedColor: '#63aabc',
+   activeColor: '#71dd13',
+   completedColor: '#069420',
+   opacity: 1,
 }
 var measureControl = L.control.measure(measureControlOption);
 measureControl.addTo(map);
@@ -121,7 +122,7 @@ $('.zoom-out').click(function () {
 
 //Zoom to layer
 $('.extend').click(function () {
-   map.setView([28.1392,83.85335], 18);
+   map.setView([28.1392,83.85335], 17);
 });
 
 //Toggle full layer

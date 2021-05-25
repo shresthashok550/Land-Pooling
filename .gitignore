@@ -1,0 +1,14 @@
+procfile
+extra.txt
+
+requirements.txt
+venv
+account/migrations/
+pages/migrations
+shapefiles/migrations
+shapefiles/load_layer.py
+shapefiles/load.py
+shapefiles/loadcheck.py
+shapefiles/loader.py
+shapefiles/loadmain.py
+shapefiles/loadpoi.py

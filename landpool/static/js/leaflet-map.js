@@ -1,7 +1,7 @@
 // var map declear
 var map = L.map('map', {
     zoomControl: false
-}).setView([28.1392,83.85335], 18);
+}).setView([28.1392,83.85335], 17);
 var scale = L.control.scale().addTo(map); //scale contorl of the map
 
 // base layer (tilelayer as a variable)
@@ -13,7 +13,7 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var Satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri,',
     minZoom: 1,
-    maxZoom: 17,
+    maxZoom: 25,
 }).addTo(map);
 
 var watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
