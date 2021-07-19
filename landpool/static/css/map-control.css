@@ -166,7 +166,8 @@ Other options
     position: fixed;
     right: 0;
     top: 55px;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
+    color: aqua;
     margin: 0;
     padding: 0;
 }
@@ -181,7 +182,7 @@ Other options
 
 /* Share map */
 .share .share-link {
-    color: #fff;
+    color: rgb(223, 20, 20);
     padding: 5px 10px;
     background: #888;
     border: 1px solid #fff;
@@ -261,7 +262,7 @@ Other options
     position: absolute;
     left: 0;
     top: 0;
-    width: 500px;
+    width: 400px;
     height: 91%;
     overflow-y: auto;
     overflow-x: hidden;

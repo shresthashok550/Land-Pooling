@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'leaflet',
     'acccount',
     'shapefiles',
-    'suit'
+    'suit',
+    'product'
 ]
 
 MIDDLEWARE = [

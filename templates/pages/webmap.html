@@ -105,13 +105,15 @@
                                 <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
                                 <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
                                 <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
-                                <tr><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                {% for p in Joint %}
+                                <tr><td> Owner name </td><td>{{ p.owner_name }}</td></tr>
+                                
                                 <tr><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
                                 <tr><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
                                 <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
                                 <tr><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
                                   <tr><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
-                              <tr><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>`);
+                              <tr><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>{% endfor %}`);
           },
         });
       },
@@ -221,8 +223,8 @@
   $(".cut-selection").hide();
   $(".zonal-selection").hide();
 
-  var dem = new L.TileLayer.WMS('http://localhost:8080/geoserver/final1/wms',{
-    layers: 'final1:dem1',
+  var dem = new L.TileLayer.WMS('http://localhost:8080/geoserver/final2/wms',{
+    layers: 'final2:DEM',
     format: 'image/png',
     transparent: true,
 })
@@ -235,8 +237,37 @@ var layer = new L.layerGroup().addLayer(dem),
     dem.setOpacity(this.value);
     });
     layerToggler(selector, layer, opac);
+    removeAllRasterLayer(layer);
 
+var cut = new L.TileLayer.WMS('http://localhost:8080/geoserver/final2/wms',{
+  layers: 'final2:Cut_Fill1',
+  format: 'image/png',
+  transparent: true,
+})
+var layer = new L.layerGroup().addLayer(cut),
+      selector = $(".cutlayer");
+     opac = $(".cut-selection");
+    $('.sldOpacity10').on('change', function(){
+    $('.image-opacity10').html(this.value);
+    cut.setOpacity(this.value);
+    });
+    layerToggler(selector, layer, opac);
+    removeAllRasterLayer(layer);
 
+var zonal = new L.TileLayer.WMS('http://localhost:8080/geoserver/final2/wms',{
+  layers: 'final2:Zonal_Statistics2',
+  format: 'image/png',
+  transparent: true,
+})
+var layer = new L.layerGroup().addLayer(zonal),
+      selector = $(".zonallayer");
+     opac = $(".zonal-selection");
+    $('.sldOpacity11').on('change', function(){
+    $('.image-opacity11').html(this.value);
+    zonal.setOpacity(this.value);
+    });
+    layerToggler(selector, layer, opac);
+    removeAllRasterLayer(layer);
 
   function layerToggler(selector, layer, opac) {
     selector.click(function () {
@@ -266,6 +297,17 @@ var layer = new L.layerGroup().addLayer(dem),
     });
   }
 
+  function removeAllRasterLayer(layer) {
+    $(".remove-all-raster-layers").click(function () {
+      map.removeLayer(layer);
+      $(".demlayer").prop("checked", false);
+      $(".cutlayer").prop("checked", false);
+      $(".zonallayer").prop("checked", false);
+      $(".dem-selection").hide();
+      $(".cut-selection").hide();
+      $(".zonal-selection").hide();
+    });
+  }
   // add default utilities layers
   function addDefaultVectorLayer(layer) {
     $(".add-default-vector-layer").click(function () {
@@ -277,8 +319,54 @@ var layer = new L.layerGroup().addLayer(dem),
     });
   }
 
+  $(".client-support-btn").click(function () {
+    map.on("click", function (e) {
+      var lat = e.latlng.lat,
+        lng = e.latlng.lng,
+        popup = `<!-- Default form register -->
+  <form class="text-center border border-light p-5" action="{% url 'product' %}" method="POST">
+      {% csrf_token %}
 
-console.log('data is loaded');
+      <p class="h4 mb-4">Product Form</p>
 
+      <div class="form-row mb-4">
+          <div class="col">
+              <!-- First name -->
+              <input type="text" name="firstname" id="defaultRegisterFormFirstName" class="form-control" placeholder="Your First Name">
+          </div>
+          <div class="col">
+              <!-- Last name -->
+              <input type="text" name="lastname" id="defaultRegisterFormLastName" class="form-control" placeholder="Your Last Name">
+          </div>
+      </div>
+
+      <!-- Product header -->
+      <div class="form-row mb-4">
+        <div class="col">
+      <input type="text" name="product_header" id="defaultRegisterPhonePassword" class="form-control" placeholder="Input your product header" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+      </div>  
+      <div class="col">  
+      <input type="number" name="plot_no" id="defaultRegisterplono" class="form-control" placeholder="Enter plot number">
+      </div>
+      </div>
+      <input type="hidden" name="lat" value="${lat}">
+      <input type="hidden" name="lng" value = "${lng}">
+
+      <!-- Password -->
+      <input type="text" name="product_body" id="defaultRegisterFormPassword" class="form-control" placeholder="Your product in detail" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+
+      <!-- Sign up button -->
+      <button class="btn btn-info my-4 btn-block product-submit" type="submit">Submit your product</button>
+  </form>`;
+      var marker = new L.Marker([lat, lng])
+          .addTo(map)
+          .bindPopup(popup)
+          .openPopup(),
+        circleMarker = new L.circleMarker([lat, lng], bufferStyle, {
+          draggable: true,
+        }).addTo(map);
+      map.off("click");
+    });
+  });
 </script>
 {% endblock js %}

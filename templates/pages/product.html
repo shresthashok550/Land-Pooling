@@ -1,0 +1,144 @@
+{% load static %}
+<!-- bootstrap -->
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>
+<!-- leaflet css -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+<style>
+  .nav-bar {
+    z-index: 1100 !important;
+  }
+
+  .product {
+    margin-top: 80px;
+  }
+
+  .product-body {
+    height: 90vh;
+    padding-right: 50px;
+    left: -100px;
+  }
+
+  .product-1 {
+    padding: 30px 0 0 0;
+    width: 125%;
+  }
+
+  .sidebar-product {
+    position: fixed;
+    padding: 20px 10px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    right: 20px;
+    width: 400px;
+    margin-top: 40px;
+  }
+</style>
+
+{% include "partials/_navindex.html" %}
+<section class="container product">
+  <div class="row">
+    <div class="col-8 product-body">
+      <div class="product-1">
+        <h1>Products</h1>
+        <p>
+          <i>All products listed out by farmers </i>
+        </p>
+        <p>Click on the marker to see the full detail.  For Full map : <a href="{% url 'webmap' %}" class="btn" >
+         <button class="btn-info mt-3" style="right: 100px;">Goto Web-map</button></a></p>
+        <div class="map" id="map" style="width: 100%; height: 450px; z-index: 1;"><a href="#"><i class="fas fa-expand full-browser" data-toggle='tooltip'  title='Expand the full browser' style="z-index: 999;"></div>
+      
+      </div>
+      
+    </div>
+    <div class="col-4 sidebar-product">
+      <h3 class="sidebar-header">Top most products</h3>
+      <ul>
+        <a href="#">
+          <li>Vegetables</li>
+        </a>
+        <a href="#">
+          <li>Fruits</li>
+        </a>
+        <a href="#">
+          <li>Herbs</li>
+        </a>
+        <a href="#">
+          <li>Wheats</li>
+        </a>
+        <a href="#">
+          <li>Maize</li>
+        </a>
+        </a>
+      </ul>
+    </div>
+  </div>
+</section>
+{% include "partials/_footer.html" %}
+
+<!-- leaflet js -->
+<script
+  src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""
+></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+<script>
+
+  //product-map
+  
+  var map = L.map('map').setView([28.13953, 83.85477], 17);
+
+  //map scale
+  scale = L.control.scale().addTo(map),
+
+      //osm baselayer
+      Satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri,',
+        minZoom: 1,
+        maxZoom: 25,
+      }).addTo(map);
+
+      $.getJSON("{% url 'plot' %}",function(data){
+      L.geoJson(data).addTo(map);
+      }); 
+   map.addControl(new L.Control.Fullscreen()); 
+  //circle marker style
+  mystyle = {
+      radius: 20,
+      fillColor: "#1EEB13",
+      color: "#000",
+      weight: 3,
+      opacity: .7,
+      fillOpacity: 0.5,
+  }
+
+ var markerGroup = new L.featureGroup()
+  {% for p in product %}
+    var lat = {{ p.lat }}
+    var lng = {{ p.lng }}
+    var marker = L.marker([lat,lng])
+      .bindPopup(`<h5>{{ p.product_header }}</h5></br> <b> Plot No: </b> {{ p.plot_no }} </br> <b>Listed by: </b>{{ p.first_name }} {{ p.last_name }}</br><b>Listed date: </b>{{ p.product_date }}`).openPopup()
+    marker.addTo(markerGroup).addTo(map);
+    var productMarkerCircle = L.circleMarker([lat, lng],mystyle).addTo(markerGroup).addTo(map);
+  {% endfor %}
+  //     productMarkerCircle = L.circleMarker([
+  //         {% for p in product %}
+  // {{ p.lat }}, {{ p.lng }}
+  // {% endfor %}
+  //     ], mystyle).addTo(map);
+</script>
