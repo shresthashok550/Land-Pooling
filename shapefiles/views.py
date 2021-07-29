@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from .models import Parcel, Point, Joint, Road, Irrigation
+from .models import Parcel, Point, Plot, Road, Irrigation
 # Create your views here.
 
 def plot_datasets(request):
-	plots = serialize('geojson', Joint.objects.all())
+	plots = serialize('geojson', Plot.objects.all())
 	return HttpResponse(plots,content_type='json')
 
 def parcel_datasets(request):

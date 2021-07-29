@@ -2,7 +2,8 @@
 var map = L.map('map', {
     zoomControl: false
 }).setView([28.1392,83.85335], 17);
-var scale = L.control.scale().addTo(map); //scale contorl of the map
+var scale = L.control.scale().addTo(map);//scale contorl of the map
+var locate = L.control.locate().addTo(map); 
 
 // base layer (tilelayer as a variable)
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -26,7 +27,7 @@ var watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercol
 
 var mapBox = L.tileLayer('https://api.tiles.mapbox.com/styles/v1/{username}/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    username: 'iamtekson',
+    username: 'shresthashok550',
     id: 'cjwhym7s70tae1co8zf17a3r5',
     accessToken: 'pk.eyJ1IjoiaWFtdGVrc29uIiwiYSI6ImNqdjV4YzI4YjB0aXk0ZHBtNnVnNWxlM20ifQ.FjQJyCTodXASYtOK8IrLQA'
 });

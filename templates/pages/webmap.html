@@ -97,23 +97,154 @@
         layer.on({
           click: function (e) {
             popupContents(e);
-            $(".sidebar-info").html(`<h4>Plot</h4>
+            if(feature.properties.existing5 !== 0){
+              $(".sidebar-info").html(`<h4>Plot</h4>
                               <div class="container"><table class="table table-striped">
                               <thead><tr><th>Properties</th><th>Value</th></tr></thead>
-                              <tbody><tr><td> Id </td><td> ${feature.properties.pk}</td></tr>
-                                <tr><td> Plot No. </td><td> ${feature.properties.plot_no}</td></tr>
+                              <tbody><tr><td> Plot No. </td><td> ${feature.properties.pk}</td></tr>
                                 <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
                                 <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
                                 <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
-                                {% for p in Joint %}
-                                <tr><td> Owner name </td><td>{{ p.owner_name }}</td></tr>
-                                
-                                <tr><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
-                                <tr><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
                                 <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
-                                <tr><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
-                                  <tr><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
-                              <tr><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>{% endfor %}`);
+                                <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r1}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar1}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole1}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa1}</td></tr>
+                              <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner2}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing2}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r2}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_ar2}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole2}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa2}</td></tr>
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner3}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing3}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r3}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar3}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole3}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa3}</td></tr>
+                              <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner3}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing4}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r4}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_ar4}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole4}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa4}</td></tr>
+
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner5}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing5}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r5}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar5}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole5}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa5}</td></tr>`);
+            }
+            else if(feature.properties.existing3 !== 0)
+            {
+              $(".sidebar-info").html(`<h4>Plot</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Plot No. </td><td> ${feature.properties.pk}</td></tr>
+                                <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
+                                <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
+                                <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
+                                <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
+                                <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r1}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar1}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole1}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa1}</td></tr>
+                              <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner2}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing2}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r2}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_ar2}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole2}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa2}</td></tr>
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner3}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing3}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r3}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar3}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole3}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa3}</td></tr>`);
+            }
+            else if(feature.properties.existing2 !== 0){
+              $(".sidebar-info").html(`<h4>Plot</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Plot No. </td><td> ${feature.properties.pk}</td></tr>
+                                <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
+                                <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
+                                <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
+                                <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
+                                <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r1}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar1}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole1}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa1}</td></tr>
+                              <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner2}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing2}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r2}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_ar2}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole2}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa2}</td></tr>`);
+            }
+            else if(feature.properties.existing1 !== 0){
+              $(".sidebar-info").html(`<h4>Plot</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Plot No. </td><td> ${feature.properties.pk}</td></tr>
+                                <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
+                                <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
+                                <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
+                                <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
+                                <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>
+                              <tr style="color:blue;"><td> Owner name </td><td> ${feature.properties.owner1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area (m2) </td><td> ${feature.properties.existing1}</td></tr>
+                                <tr style="color:blue;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_r1}</td></tr>
+                                <tr style="color:blue;"><td> Distributable area </td><td> ${feature.properties.distri_ar1}</td></tr>
+                                  <tr style="color:blue;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole1}</td></tr>
+                              <tr style="color:blue;"><td> Distributed area </td><td>${feature.properties.distri_pa1}</td></tr>`);
+            }
+            else{
+              $(".sidebar-info").html(`<h4>Plot</h4>
+                              <div class="container"><table class="table table-striped">
+                              <thead><tr><th>Properties</th><th>Value</th></tr></thead>
+                              <tbody><tr><td> Plot No. </td><td> ${feature.properties.pk}</td></tr>
+                                <tr><td> Plot Perimeter </td><td> ${feature.properties.plot_perim}</td></tr>
+                                <tr><td> Plot area(m2) </td><td> ${feature.properties.plot_area}</td></tr>
+                                <tr><td> Plot area(ropani) </td><td> ${feature.properties.ropani}</td></tr>
+                                <tr><td> Category </td><td> ${feature.properties.category}</td></tr>
+                                <tr style="color:green;"><td> Owner name </td><td> ${feature.properties.owner_name}</td></tr>
+                                <tr style="color:green;"><td> Existing area (m2) </td><td> ${feature.properties.existing_a}</td></tr>
+                                <tr style="color:green;"><td> Existing area(ropani) </td><td> ${feature.properties.owner_ropa}</td></tr>
+                                <tr style="color:green;"><td> Distributable area </td><td> ${feature.properties.distri_are}</td></tr>
+                                  <tr style="color:green;"><td> Parcel(P) / Whole(W) </td><td>${feature.properties.par_whole}</td></tr>
+                              <tr style="color:green;"><td> Distributed area </td><td>${feature.properties.distri_pa}</td></tr>`);
+            }
           },
         });
       },

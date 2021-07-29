@@ -334,7 +334,11 @@ var intro = introJs();
          },
          {
             element: document.querySelector('.nav-web'),
-            intro: "<h1>Nav bar</h1><ol><li>Options</li><ul><li>Map printout</li><li>Add vector layers</li><li>Measure function</li><li>Other many more actions</li></ul><li>User login</li><li>Home button</li></ol>."
+            intro: "<h1>Nav bar</h1><ol><li>Options</li><ul><li>Map printout</li><li>Add vector layers</li><li>Measure function</li><li>Other many more actions</li></ul><li>Product Page</li><li>User login</li><li>Home button</li></ol>."
+         },
+         {
+            element: '.leaflet-control-locate',
+            intro:'<h1>Geolocation</h1><p>Find your current location from here.</p>'
          },
          {
             element: '.leaflet-control-geocoder',
@@ -342,7 +346,7 @@ var intro = introJs();
          },
          {
             element: document.querySelector('.side-control'),
-            intro: "<h1> basic functionalities </h1><ul><li>Zoom in</li><li>Zoom out</li><li>Zoom to layer</li><li>Full browser</li><li>3D layer</li><li>Info about feature</li><li>Add marker</li</ul>",
+            intro: "<h1> basic functionalities </h1><ul><li>Zoom in</li><li>Zoom out</li><li>Zoom to layer</li><li>Full browser</li><li>Print map</li><li>Measurement</li><li>Add Vector Layer</li><li>Add Product</li></ul>",
             position: 'right'
          },
          {

@@ -96,6 +96,21 @@ Other options
     background-color: rgb(153, 202, 202) !important;
     border: blue solid !important;
 }
+.leaflet-control-locate {
+    margin: 0 !important;
+    text-align: center;
+    font-size: 2rem;
+    padding: 5px;
+    color: blue;
+    position: fixed;
+    height: 60px;
+    width: 60px;
+    top: 0;
+    left: 75.5%;
+    z-index: 1000;
+    background-color: rgb(153, 202, 202) !important;
+    border: blue solid !important;
+}
 .leaflet-control-geocoder input[type="text"], textarea {
     background-color : #fff; 
   }

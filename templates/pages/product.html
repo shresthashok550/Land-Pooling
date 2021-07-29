@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% block title %} Products {% endblock title %}
 <!-- bootstrap -->
 <link
   rel="stylesheet"
@@ -106,7 +106,7 @@
   //map scale
   scale = L.control.scale().addTo(map),
 
-      //osm baselayer
+      //satellite baselayer
       Satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri,',
         minZoom: 1,

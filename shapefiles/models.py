@@ -2,95 +2,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 
-# class Final(models.Model):
-#     shape_leng = models.FloatField()
-#     shape_area = models.FloatField()
-#     plot_no = models.BigIntegerField()
-#     geom = gis_models.MultiPolygonField(srid=32644)
-
-#     def __unicode__(self):
-#     	return self.plot_no
-
-#     class Meta:
-#         verbose_name_plural = 'Final'
-
-# class OldParcel(models.Model):
-#     owner_name = models.CharField(max_length=50)
-#     finalparce = models.BigIntegerField()
-#     existing_a = models.FloatField()
-#     ropani_aan = models.FloatField()
-#     geom = gis_models.MultiPolygonField(srid=32644)
-
-#     def __unicode__(self):
-#     	return self.owner_name
-
-#     class Meta:
-#         verbose_name_plural = 'Old'
-
-# class District(models.Model):
-#     state_code = models.IntegerField()
-#     district = models.CharField(max_length=50)
-#     province = models.CharField(max_length=50)
-#     geom = gis_models.MultiPolygonField(srid=4326)
-
-#     def __unicode__(self):
-#     	return self.district
-
-#     class Meta:
-#         verbose_name_plural = 'District'
-
-# class Parcel1(models.Model):
-#     owner_name = models.CharField(blank=True, null=True, max_length=50)
-#     parcelno = models.FloatField(blank=True, null=True)
-#     existing_a = models.FloatField(blank=True, null=True)
-#     ropani_aan = models.FloatField(blank=True, null=True)
-#     ropani = models.FloatField(blank=True, null=True)
-#     aana = models.FloatField(blank=True, null=True)
-#     paisa = models.FloatField(blank=True, null=True)
-#     geom = gis_models.MultiPolygonField(blank=True, null=True, srid=4326)
-
-#     def __unicode__(self):
-#     	return self.owner_name
-
-#     class Meta:
-#         verbose_name_plural = 'Parcel1'
-
-# class Plot(models.Model):
-#     objectid = models.BigIntegerField()
-#     shape_leng = models.FloatField()
-#     shape_area = models.FloatField()
-#     geom = gis_models.MultiPolygonField(srid=4326)
-
-#     def __unicode__(self):
-#     	return self.objectid
-
-#     class Meta:
-#         verbose_name_plural = 'Plot'
-
-    
-# class Plot1(models.Model):
-#     shape_leng = models.FloatField()
-#     shape_area = models.FloatField()
-#     plot_no = models.BigIntegerField()
-#     ropani = models.FloatField()
-#     geom = gis_models.MultiPolygonField(srid=4326)
-
-#     def __unicode__(self):
-#     	return self.plot_no
-
-#     class Meta:
-#         verbose_name_plural = 'Plot1'
-
-# class Poi(models.Model):
-#     point_id = models.BigIntegerField()
-#     geom = gis_models.MultiPointField(srid=4326)
-
-#     def __unicode__(self):
-#     	return self.point_id
-
-#     class Meta:
-#         verbose_name_plural = 'Poi'
-
 class Parcel(models.Model):
     owner_name = models.CharField(max_length=50)
     parcelno = models.BigIntegerField()
@@ -118,26 +29,61 @@ class Point(models.Model):
     class Meta:
         verbose_name_plural = 'Point'
 
-class Joint(models.Model):
-    plot_no = models.BigIntegerField()
+class Plot(models.Model):
+    plot_no = models.IntegerField(primary_key=True)
     plot_perim = models.FloatField()
     plot_area = models.FloatField()
     ropani = models.FloatField()
-    owner_name = models.CharField(max_length=50)
-    existing_a = models.FloatField()
-    owner_ropa = models.FloatField()
-    owner_key = models.BigIntegerField()
     category = models.CharField(max_length=7)
+    owner_name = models.CharField(max_length=50)
+    owner1 = models.CharField(max_length=50)
+    owner2 = models.CharField(max_length=30)
+    owner3 = models.CharField(max_length=30)
+    owner4 = models.CharField(max_length=30)
+    owner5 = models.CharField(max_length=30)
+    existing_a = models.FloatField()
+    existing1 = models.FloatField()
+    existing2 = models.FloatField()
+    existing3 = models.FloatField()
+    existing4 = models.FloatField()
+    existing5 = models.FloatField()
+    owner_ropa = models.FloatField()
+    owner_r1 = models.FloatField()
+    owner_r2 = models.FloatField()
+    owner_r3 = models.FloatField()
+    owner_r4 = models.FloatField()
+    owner_r5 = models.FloatField()
+    owner_key = models.FloatField()
+    owner_key1 = models.BigIntegerField()
+    owner_key2 = models.BigIntegerField()
+    owner_key3 = models.BigIntegerField()
+    owner_key4 = models.BigIntegerField()
+    owner_key5 = models.BigIntegerField()
     distri_are = models.FloatField()
+    distri_ar1 = models.FloatField()
+    distri_ar2 = models.FloatField()
+    distri_ar3 = models.FloatField()
+    distri_ar4 = models.FloatField()
+    distri_ar5 = models.FloatField()
     par_whole = models.CharField(max_length=1)
+    par_whole1 = models.CharField(max_length=10)
+    par_whole2 = models.CharField(max_length=10)
+    par_whole3 = models.CharField(max_length=10)
+    par_whole4 = models.CharField(max_length=10)
+    par_whole5 = models.CharField(max_length=10)
     distri_pa = models.FloatField()
+    distri_pa1 = models.FloatField()
+    distri_pa2 = models.FloatField()
+    distri_pa3 = models.FloatField()
+    distri_pa4 = models.FloatField()
+    distri_pa5 = models.FloatField()
     geom = gis_models.MultiPolygonField(srid=4326)
 
     def __unicode__(self):
     	return self.plot_no
 
     class Meta:
-        verbose_name_plural = 'Joint'
+        verbose_name_plural = 'Plot'
 
 class Road(models.Model):
     objectid = models.BigIntegerField()
