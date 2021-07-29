@@ -1,6 +1,6 @@
 procfile
 extra.txt
-
+finaltable.geojson
 requirements.txt
 venv
 account/migrations/
@@ -12,3 +12,4 @@ shapefiles/loadcheck.py
 shapefiles/loader.py
 shapefiles/loadmain.py
 shapefiles/loadpoi.py
+staticfiles
